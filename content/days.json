@@ -1,0 +1,1028 @@
+[
+  {
+    "id": 1,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "O Observador",
+    "focus": "Assumir a personalidade de observador",
+    "declaration": "Eu começo a perceber e direcionar o foco da minha mente.",
+    "intro": "Jejum da negatividade (7 dias): parar de alimentar coisas ruins, fofoca, vida de outras pessoas. Não falar de coisas que não promovem mudança. Se atentar aos \"leões\" ilusórios criados na mente — anotar quando identificados e fazer observações positivas.",
+    "sections": [
+      {
+        "type": "reading",
+        "title": "Exercício de hoje: Observação",
+        "body": "Observe com atenção seus padrões mentais, emocionais e sua linguagem automática ao longo do dia."
+      },
+      {
+        "type": "exercise",
+        "title": "1 — Pensamentos recorrentes",
+        "instructions": "Perceba quais pensamentos aparecem com mais frequência — principalmente sobre dinheiro, relacionamento e futuro. Se encontrar um \"leão\" ilusório, substitua por um pensamento consciente.",
+        "fields": [
+          {
+            "id": "thoughts_recurring",
+            "kind": "textarea",
+            "label": "Anotações — pensamentos recorrentes",
+            "placeholder": "Quais pensamentos se repetem? Quais padrões de consumo ou crenças aparecem?"
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "2 — Emoções predominantes",
+        "instructions": "Perceba quais emoções tomam conta: preocupação, ansiedade, gratidão, esperança. Anote quais emoções mais aparecem.",
+        "fields": [
+          {
+            "id": "emotions",
+            "kind": "textarea",
+            "label": "Anotações — emoções predominantes",
+            "placeholder": "Como você se sente na maior parte do tempo?"
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "3 — Linguagem automática",
+        "instructions": "Perceba o que é falado automaticamente sem perceber. Ex: \"as coisas são difíceis\", falar mal dos outros, etc.",
+        "fields": [
+          {
+            "id": "automatic_language",
+            "kind": "textarea",
+            "label": "Anotações — linguagem automática",
+            "placeholder": "Quais frases ou pensamentos automáticos você identificou?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu começo a perceber e direcionar o foco da minha mente."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "Mudando o Foco",
+    "focus": "Mudando o foco da mente",
+    "declaration": "Eu começo a perceber e direcionar o foco da minha mente.",
+    "intro": "Observe o foco da mente em pelo menos 3 momentos diferentes ao longo do dia.",
+    "sections": [
+      {
+        "type": "exercise",
+        "title": "1 — Quando algo dá errado",
+        "instructions": "Perceba qual é o primeiro pensamento que vem à tona quando algo foge do seu controle.",
+        "fields": [
+          {
+            "id": "when_wrong",
+            "kind": "textarea",
+            "label": "Anotações",
+            "placeholder": "O que você pensou e sentiu?"
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "2 — Quando pensa sobre o futuro",
+        "instructions": "Sua mente tende para preocupações, ansiedade ou abundância e possibilidades?",
+        "fields": [
+          {
+            "id": "future_focus",
+            "kind": "textarea",
+            "label": "Anotações",
+            "placeholder": "Descreva seu padrão mental sobre o futuro."
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "3 — Quando fala sobre sua própria vida",
+        "instructions": "Preste atenção nas frases que usa para se descrever. Você se autodeprecia ou se eleva?",
+        "fields": [
+          {
+            "id": "self_description",
+            "kind": "textarea",
+            "label": "Anotações",
+            "placeholder": "Como você se descreve?"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Pergunta de alinhamento",
+        "items": [
+          {
+            "id": "alignment_q1",
+            "kind": "textarea",
+            "label": "Que tipo de pensamento costuma ocupar a minha mente com mais frequência?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu começo a perceber e direcionar o foco da minha mente."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "O Poder das Palavras",
+    "focus": "Consciência sobre as palavras proferidas",
+    "declaration": "As palavras constroem minha vida.",
+    "intro": "As palavras constroem sua vida. Preste atenção nas palavras que são proferidas — mentalmente e em voz alta.",
+    "sections": [
+      {
+        "type": "reading",
+        "title": "Ação prática",
+        "body": "Para cada frase negativa (mental ou falada), faça uma substituição consciente por algo positivo."
+      },
+      {
+        "type": "exercise",
+        "title": "Substituições conscientes",
+        "instructions": "Registre frases negativas identificadas e suas substituições positivas.",
+        "fields": [
+          {
+            "id": "negative_phrases",
+            "kind": "textarea",
+            "label": "Frases negativas identificadas",
+            "placeholder": "Ex: \"Meu trabalho está complicado\"..."
+          },
+          {
+            "id": "positive_replacements",
+            "kind": "textarea",
+            "label": "Substituições positivas",
+            "placeholder": "Ex: \"Estou encontrando soluções no meu trabalho\"..."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "Padrões Invisíveis",
+    "focus": "Identificar padrões ocultos",
+    "declaration": "Eu sou consciente dos padrões que estavam influenciando minha vida.",
+    "intro": "Exercício de hoje: responder as perguntas com honestidade.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Padrões financeiros",
+        "items": [
+          {
+            "id": "financial_patterns",
+            "kind": "textarea",
+            "label": "Que padrões eu percebo na minha vida financeira?",
+            "placeholder": "Ex: gasto impulsivamente, não tenho reserva..."
+          },
+          {
+            "id": "financial_commitment",
+            "kind": "text",
+            "label": "Compromisso",
+            "placeholder": "Eu reconheci e escolho não repetir esse padrão"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Padrões de comportamento",
+        "items": [
+          {
+            "id": "behavior_patterns",
+            "kind": "textarea",
+            "label": "Que padrões eu percebo na minha forma de agir?",
+            "placeholder": "Ex: começo coisas e não termino, adio decisões..."
+          },
+          {
+            "id": "behavior_commitment",
+            "kind": "text",
+            "label": "Compromisso",
+            "placeholder": "Eu reconheci e escolho não repetir esse padrão"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Pensamentos repetidos",
+        "items": [
+          {
+            "id": "thought_patterns",
+            "kind": "textarea",
+            "label": "Que pensamentos eu repito com frequência na minha mente?"
+          },
+          {
+            "id": "chosen_pattern",
+            "kind": "textarea",
+            "label": "Escolha um único padrão e escreva: \"Eu reconheci e escolho não repetir esse padrão\""
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Pergunta do dia",
+        "items": [
+          {
+            "id": "clarity_question",
+            "kind": "textarea",
+            "label": "Qual padrão da minha vida eu percebo com mais clareza hoje?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou consciente dos padrões que estavam influenciando minha vida."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "Padrão de Comparação",
+    "focus": "Reconhecer e redirecionar comparações",
+    "declaration": "Eu sou responsável pelo meu próprio caminho.",
+    "intro": "Exercício de hoje: começar a perceber quando ocorrer a comparação.",
+    "sections": [
+      {
+        "type": "exercise",
+        "title": "1 — Reconheça que está comparando",
+        "instructions": "Quando perceber comparação, registre o momento.",
+        "fields": [
+          {
+            "id": "comparison_moment",
+            "kind": "textarea",
+            "label": "Registro",
+            "placeholder": "Quando e com quem você se comparou?"
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "2 — Redirecione",
+        "instructions": "Anote qual é o próximo passo do seu próprio caminho + o sentimento.",
+        "fields": [
+          {
+            "id": "redirect_step",
+            "kind": "textarea",
+            "label": "Próximo passo do meu caminho",
+            "placeholder": "O que importa para você agora?"
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "3 — Reduzir estímulos de comparação",
+        "instructions": "Evite consumo ou conversas que reforcem comparação.",
+        "fields": [
+          {
+            "id": "reduce_comparison",
+            "kind": "textarea",
+            "label": "O que você vai reduzir ou evitar?",
+            "placeholder": "Redes sociais, conversas específicas..."
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Reflexão",
+        "items": [
+          {
+            "id": "what_matters",
+            "kind": "textarea",
+            "label": "O que realmente importa para o meu próprio caminho?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou responsável pelo meu próprio caminho."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "O Jejum do Indesejado",
+    "focus": "Liberar padrões do passado",
+    "declaration": "Eu libero conscientemente os padrões que já não fazem parte da direção da minha nova vida.",
+    "intro": "Exercício prático: em duas listas detalhadas — de um lado \"a vida que eu não quero\", do outro \"a minha nova vida\" — em todas as áreas da vida. Depois de escrever a primeira lista, rasgue-a com intenção verdadeira. A segunda lista deve ser guardada.",
+    "sections": [
+      {
+        "type": "list",
+        "title": "A vida que eu NÃO quero",
+        "instructions": "Liste com o máximo de detalhe possível. Depois, simbolicamente, reconheça que isso pertence ao passado.",
+        "listId": "life_not_want",
+        "minItems": 3
+      },
+      {
+        "type": "list",
+        "title": "A MINHA NOVA VIDA",
+        "instructions": "Liste com o máximo de detalhe possível em todas as áreas. Guarde esta lista em um local visível.",
+        "listId": "new_life",
+        "minItems": 3
+      },
+      {
+        "type": "reading",
+        "title": "Ação",
+        "body": "Respire fundo e traga emoção ao liberar o indesejado. Guarde a lista da nova vida em um local visível."
+      },
+      {
+        "type": "declaration",
+        "text": "Eu libero conscientemente os padrões que já não fazem parte da direção da minha nova vida."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "week": 1,
+    "weekTitle": "Observação",
+    "title": "A Liberação do Passado",
+    "focus": "Fé, abundância e nova realidade",
+    "declaration": "Eu sou a imagem e semelhança do criador. Eu sou criador.",
+    "intro": "Exercício prático de liberação e criação consciente.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Realidade desejada",
+        "items": [
+          {
+            "id": "reality_14_days",
+            "kind": "textarea",
+            "label": "Que realidade eu quero criar nos próximos 14 dias, sabendo que eu sou o criador?"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Característica de Deus",
+        "items": [
+          {
+            "id": "god_quality",
+            "kind": "textarea",
+            "label": "Escolha uma característica de Deus que você ainda tem dificuldade de acreditar — e declare sua identidade com ela."
+          }
+        ]
+      },
+      {
+        "type": "reading",
+        "title": "Todas as manhãs dizer",
+        "body": "Eu sou a imagem e semelhança do criador, eu sou criador. Eu sou responsável pela minha realidade e hoje eu escolho criar algo melhor."
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou a imagem e semelhança do criador. Eu sou criador. Eu sou responsável pela minha realidade."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "Definindo o Alvo",
+    "focus": "Visão e direção intencional",
+    "declaration": "Eu sou alguém que direciona a minha atenção com consciência. Eu escolho transformar minha vida financeira.",
+    "intro": "Onde não há visão, o povo perece. (Provérbios 29:18) Jejum dos próximos 7 dias: distração (redes sociais, notícias ruins, distrações digitais). Escolha UMA área da vida para focar por 1 semana.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Área de foco",
+        "items": [
+          {
+            "id": "focus_area",
+            "kind": "text",
+            "label": "Qual área da sua vida você escolhe focar esta semana? (apenas UMA)"
+          },
+          {
+            "id": "altered_reality",
+            "kind": "textarea",
+            "label": "Descreva como essa realidade já alterada se parece (no presente, como se já tivesse acontecido)"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Visualização detalhada",
+        "items": [
+          {
+            "id": "where_are_you",
+            "kind": "textarea",
+            "label": "Onde você está?"
+          },
+          {
+            "id": "what_changed",
+            "kind": "textarea",
+            "label": "O que mudou?"
+          },
+          {
+            "id": "how_you_feel",
+            "kind": "textarea",
+            "label": "Como você se sente?"
+          },
+          {
+            "id": "routine_diff",
+            "kind": "textarea",
+            "label": "O que é diferente na sua rotina?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que direciona a minha atenção com consciência. Eu escolho transformar minha vida financeira."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "O Desejo Ardente",
+    "focus": "Motivação emocional e propósito",
+    "declaration": "Meu propósito é claro e merece a minha dedicação.",
+    "intro": "Conecte-se ao desejo profundo por trás da transformação.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Reflexões",
+        "items": [
+          {
+            "id": "why_transform",
+            "kind": "textarea",
+            "label": "Por que eu quero realmente transformar essa área na minha vida?"
+          },
+          {
+            "id": "impact_loved",
+            "kind": "textarea",
+            "label": "O que muda nas vidas das pessoas que eu amo quando isso acontecer?"
+          },
+          {
+            "id": "who_become",
+            "kind": "textarea",
+            "label": "Quem eu me torno quando essa mudança acontece?"
+          },
+          {
+            "id": "why_important",
+            "kind": "textarea",
+            "label": "Por que essa mudança é importante para mim?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Meu propósito é claro e merece a minha dedicação."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "A Imagem da Realidade",
+    "focus": "Visualização e imersão emocional",
+    "declaration": "Eu sou alguém que enxerga com clareza a realidade que deseja construir.",
+    "intro": "Escreva uma cena real do futuro. Depois feche os olhos e viva mentalmente por alguns minutos. IMPORTANTE: veja no presente. Depois leia a cena em voz alta e sinta.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Cena do futuro",
+        "items": [
+          {
+            "id": "scene_where",
+            "kind": "textarea",
+            "label": "Onde você está?"
+          },
+          {
+            "id": "scene_doing",
+            "kind": "textarea",
+            "label": "O que você está fazendo?"
+          },
+          {
+            "id": "scene_feeling",
+            "kind": "textarea",
+            "label": "Como você se sente?"
+          },
+          {
+            "id": "scene_routine",
+            "kind": "textarea",
+            "label": "O que mudou na sua rotina?"
+          },
+          {
+            "id": "scene_different",
+            "kind": "textarea",
+            "label": "Como sua vida está diferente?"
+          }
+        ]
+      },
+      {
+        "type": "exercise",
+        "title": "Cena completa",
+        "instructions": "Escreva a cena completa com todos os detalhes sensoriais.",
+        "fields": [
+          {
+            "id": "full_scene",
+            "kind": "textarea",
+            "label": "Minha cena do futuro (presente)",
+            "placeholder": "Descreva a cena como se já estivesse vivendo..."
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que enxerga com clareza a realidade que deseja construir."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "Gratidão Antecipada",
+    "focus": "Gratidão e antecipação emocional",
+    "declaration": "Eu sou grato pelo meu futuro que já é real.",
+    "intro": "Escreva 5 coisas pelas quais sente gratidão na área financeira. Leia em voz alta cada uma e sinta o estado de reconhecimento.",
+    "sections": [
+      {
+        "type": "list",
+        "title": "5 gratidões financeiras",
+        "instructions": "Escreva 5 coisas. Leia em voz alta e sinta gratidão por cada uma.",
+        "listId": "gratitude_financial",
+        "minItems": 5,
+        "maxItems": 5
+      },
+      {
+        "type": "exercise",
+        "title": "Frase de gratidão",
+        "instructions": "Escreva e declare sua frase de gratidão antecipada.",
+        "fields": [
+          {
+            "id": "gratitude_phrase",
+            "kind": "textarea",
+            "label": "Minha frase de gratidão antecipada",
+            "placeholder": "Eu agradeço por... porque eu sei que está acontecendo."
+          }
+        ]
+      },
+      {
+        "type": "reading",
+        "title": "Durante o dia",
+        "body": "Perceba um momento que normalmente traz ansiedade. Ao sentir, faça uma pausa e repita: \"Eu já recebi isso, já é real.\""
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou grato pelo meu futuro que já é real."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "A Identidade da Nova Realidade",
+    "focus": "Afirmações de identidade no presente",
+    "declaration": "Eu sou exatamente alguém que constrói a realidade que deseja viver.",
+    "intro": "Escreva 5 frases no presente sobre quem você é. Depois leia em voz alta.",
+    "sections": [
+      {
+        "type": "list",
+        "title": "5 frases de identidade (presente)",
+        "instructions": "Ex: \"Eu sou alguém que...\" — escreva 5 frases no presente.",
+        "listId": "identity_phrases",
+        "minItems": 5,
+        "maxItems": 5
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou exatamente alguém que constrói a realidade que deseja viver."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "O Merecimento",
+    "focus": "Autovalor e dignidade",
+    "declaration": "Eu sou digno de construir uma vida melhor.",
+    "intro": "Liste 5 qualidades ou capacidades suas. Responda como elas ajudam a construir a realidade escolhida.",
+    "sections": [
+      {
+        "type": "list",
+        "title": "5 qualidades/capacidades",
+        "listId": "qualities",
+        "minItems": 5,
+        "maxItems": 5
+      },
+      {
+        "type": "questions",
+        "title": "Reflexões",
+        "items": [
+          {
+            "id": "qualities_help",
+            "kind": "textarea",
+            "label": "Como essas qualidades me ajudam a construir a realidade que eu escolhi?"
+          },
+          {
+            "id": "deserve_belief",
+            "kind": "textarea",
+            "label": "Existe alguma crença em mim que diz que eu não mereço prosperar?"
+          }
+        ]
+      },
+      {
+        "type": "reading",
+        "title": "Afirmação",
+        "body": "EU SOU DIGNO DE CONSTRUIR UMA VIDA MELHOR, PORQUE ELA SEMPRE FOI MINHA."
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou digno de construir uma vida melhor."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "week": 2,
+    "weekTitle": "Propósito Claro",
+    "title": "O Selamento do Propósito",
+    "focus": "Compromisso com a visão de vida",
+    "declaration": "Eu caminho com clareza na direção da realidade que eu escolhi viver.",
+    "intro": "Responda os 3 pontos com calma, verdade e especificidade (quando, como, como se sente).",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "1 — Qual realidade eu escolho construir?",
+        "items": [
+          {
+            "id": "reality_build",
+            "kind": "textarea",
+            "label": "Descreva com detalhes a realidade que você escolhe construir."
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "2 — Por que essa mudança é importante para mim?",
+        "items": [
+          {
+            "id": "why_change",
+            "kind": "textarea",
+            "label": "Por que essa mudança é importante?"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "3 — Quem eu estou me tornando nesse processo?",
+        "items": [
+          {
+            "id": "becoming",
+            "kind": "textarea",
+            "label": "Quem você está se tornando?"
+          }
+        ]
+      },
+      {
+        "type": "reading",
+        "title": "Compromisso",
+        "body": "Eu me comprometo com esse caminho, confio nesse processo e sei que o colapso já está acontecendo."
+      },
+      {
+        "type": "questions",
+        "title": "Assinatura",
+        "items": [
+          {
+            "id": "signature_name",
+            "kind": "text",
+            "label": "Nome (assinatura simbólica)"
+          },
+          {
+            "id": "signature_date",
+            "kind": "text",
+            "label": "Data"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu caminho com clareza na direção da realidade que eu escolhi viver."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "A Nova Identidade",
+    "focus": "Domínio sobre impulsos e coerência",
+    "declaration": "Eu sou alguém que tem domínio sobre meus impulsos. Eu sou uma nova criatura.",
+    "intro": "Jejum de 7 dias: evitar consumo de açúcar. O propósito é alterar padrões que nos controlam — é sobre domínio, não dieta. Pergunte-se: eu controlo meus hábitos ou eles me controlam?",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "1 — Quem eu era antes de iniciar esse processo?",
+        "items": [
+          {
+            "id": "who_was",
+            "kind": "textarea",
+            "label": "Padrões, emoções, frequência..."
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "2 — O que começou a mudar nos últimos 14 dias?",
+        "items": [
+          {
+            "id": "what_changed_14",
+            "kind": "textarea",
+            "label": "Mudanças internas, novos pensamentos, padrões que perdem força..."
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "3 — Quem eu estou me tornando agora?",
+        "items": [
+          {
+            "id": "who_becoming_now",
+            "kind": "textarea",
+            "label": "Sempre no presente: EU SOU..."
+          }
+        ]
+      },
+      {
+        "type": "reading",
+        "title": "Ação do dia",
+        "body": "Quando ocorrer uma ocasião de escolha, pare por 3 segundos e pergunte: o que a minha nova versão faria? Aja como essa versão para entrar em coerência."
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que tem domínio sobre meus impulsos. Eu sou uma nova criatura — as coisas velhas já se passaram."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "O Poder da Decisão",
+    "focus": "Decisão consciente antes da certeza",
+    "declaration": "Eu sou alguém que toma decisões conscientes sobre a própria vida.",
+    "intro": "A certeza vem depois da decisão. Primeiro você decide — o universo executa. DECIDA PRIMEIRO.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Decisão financeira",
+        "items": [
+          {
+            "id": "financial_decision",
+            "kind": "textarea",
+            "label": "Que decisão importante eu preciso tomar na área financeira? (clara e sincera)"
+          },
+          {
+            "id": "smallest_step",
+            "kind": "textarea",
+            "label": "Qual o menor passo possível em direção a essa decisão? (executar HOJE)"
+          },
+          {
+            "id": "alignment_decision",
+            "kind": "textarea",
+            "label": "Que decisão pode mudar a direção da minha vida a partir de agora?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que toma decisões conscientes sobre a própria vida."
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "Ação Coerente",
+    "focus": "Transformar decisões em ações",
+    "declaration": "Eu sou alguém que transforma decisões em ações.",
+    "intro": "Defina a ação que representa sua coerência hoje e execute HOJE.",
+    "sections": [
+      {
+        "type": "exercise",
+        "title": "Ação do dia",
+        "instructions": "Descreva e execute a ação coerente com suas decisões.",
+        "fields": [
+          {
+            "id": "coherent_action",
+            "kind": "textarea",
+            "label": "A ação que representa minha coerência hoje é:",
+            "placeholder": "Descreva a ação específica..."
+          },
+          {
+            "id": "action_done",
+            "kind": "text",
+            "label": "Executei hoje? (sim/não + breve descrição)",
+            "placeholder": "Sim — descrevi o que fiz..."
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que transforma decisões em ações."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "Consciência Sobre Dinheiro e Valor",
+    "focus": "Crenças e relação consciente com dinheiro",
+    "declaration": "Eu sou alguém que aprende a lidar com dinheiro de forma consciente e responsável.",
+    "intro": "Explore sua relação com dinheiro e substitua crenças limitantes.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Reflexões sobre dinheiro",
+        "items": [
+          {
+            "id": "money_habit",
+            "kind": "textarea",
+            "label": "1 — Como eu costumo lidar com dinheiro?"
+          },
+          {
+            "id": "money_thoughts",
+            "kind": "textarea",
+            "label": "2 — Que pensamentos sobre dinheiro aparecem automaticamente?"
+          },
+          {
+            "id": "childhood_belief",
+            "kind": "textarea",
+            "label": "3 — Qual crença sobre dinheiro eu aprendi na infância? Quem disse isso? Era verdade ou frequência herdada?"
+          },
+          {
+            "id": "new_relation",
+            "kind": "textarea",
+            "label": "4 — Que relação com o dinheiro eu quero construir a partir de agora?"
+          },
+          {
+            "id": "belief_replacement",
+            "kind": "textarea",
+            "label": "5 — Escreva substituindo a crença antiga pela nova (Antes: ... / Agora: ...)"
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "Pergunta de alinhamento",
+        "items": [
+          {
+            "id": "money_alignment",
+            "kind": "textarea",
+            "label": "A minha forma de lidar com dinheiro hoje fortalece ou enfraquece a realidade que eu quero viver?"
+          }
+        ]
+      },
+      {
+        "type": "reading",
+        "title": "Ação do dia",
+        "body": "Consciência financeira: anote despesas. O objetivo é mostrar à mente que você assume responsabilidade consciente sobre essa área."
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que aprende a lidar com dinheiro de forma consciente e responsável."
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "Sustentação da Frequência",
+    "focus": "Manutenção consciente do estado desejado",
+    "declaration": "Eu sou alguém que sustenta conscientemente o estado que escolheu viver.",
+    "intro": "Programe 3 pausas conscientes ao longo do dia. Em cada pausa, pare 5 minutos e observe: o que estou pensando? Como me sinto? Este estado está alinhado? Se não, respire e retorne à direção escolhida.",
+    "sections": [
+      {
+        "type": "reading",
+        "title": "Exercício",
+        "body": "A respiração consciente é a melhor ferramenta para voltar ao estado desejado. Caso sinta sentimento desalinhado, faça outra pausa."
+      },
+      {
+        "type": "questions",
+        "title": "Registro do dia",
+        "items": [
+          {
+            "id": "pause_1",
+            "kind": "textarea",
+            "label": "Pausa 1 — O que observei e como retornei ao alinhamento?"
+          },
+          {
+            "id": "pause_2",
+            "kind": "textarea",
+            "label": "Pausa 2 — O que observei e como retornei ao alinhamento?"
+          },
+          {
+            "id": "pause_3",
+            "kind": "textarea",
+            "label": "Pausa 3 — O que observei e como retornei ao alinhamento?"
+          },
+          {
+            "id": "returns_count",
+            "kind": "text",
+            "label": "Quantos retornos conscientes foram percebidos hoje?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que sustenta conscientemente o estado que escolheu viver."
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "A Prova da Transformação",
+    "focus": "Reconhecer a evolução",
+    "declaration": "Eu sou alguém que está evoluindo e construindo uma nova realidade.",
+    "intro": "Reflita sobre quem você era e quem está se tornando.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "Reflexão",
+        "items": [
+          {
+            "id": "who_before",
+            "kind": "textarea",
+            "label": "Quem eu era antes de começar o protocolo? (pensamentos, atitudes automáticas)"
+          },
+          {
+            "id": "who_today",
+            "kind": "textarea",
+            "label": "Quem eu sou / estou me tornando hoje?"
+          },
+          {
+            "id": "biggest_fruit",
+            "kind": "textarea",
+            "label": "Qual foi o maior fruto nesses últimos 20 dias?"
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu sou alguém que está evoluindo e construindo uma nova realidade."
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "week": 3,
+    "weekTitle": "Nova Identidade",
+    "title": "O Colapso Consciente",
+    "focus": "Integração da nova identidade",
+    "declaration": "Eu colapso conscientemente a realidade que escolhi viver, crendo que já recebi.",
+    "intro": "Celebre a jornada de 21 dias e declare a realidade que escolhe sustentar.",
+    "sections": [
+      {
+        "type": "questions",
+        "title": "1 — Quem eu era no dia 1?",
+        "items": [
+          {
+            "id": "day1_self",
+            "kind": "textarea",
+            "label": "Padrões, frequências automáticas..."
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "2 — Mudanças nos 21 dias",
+        "items": [
+          {
+            "id": "changes_21",
+            "kind": "textarea",
+            "label": "Escreva as mudanças que aconteceram nos 21 dias."
+          }
+        ]
+      },
+      {
+        "type": "questions",
+        "title": "3 — A realidade que eu escolho sustentar",
+        "items": [
+          {
+            "id": "reality_sustain",
+            "kind": "textarea",
+            "label": "Com detalhes, sempre no presente, como quem já recebeu. Leia em voz alta."
+          }
+        ]
+      },
+      {
+        "type": "declaration",
+        "text": "Eu colapso conscientemente a realidade que escolhi viver, crendo que já recebi."
+      }
+    ]
+  }
+]
