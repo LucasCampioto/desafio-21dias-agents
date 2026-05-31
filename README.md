@@ -37,7 +37,9 @@ Docs interativas: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ## Deploy na Vercel
 
-Configuração pronta: `vercel.json`, `api/index.py`, `runtime.txt`.
+Configuração pronta: `vercel.json` (usa `main.py` na raiz) e `runtime.txt`.
+
+**Importante:** conecte o projeto Vercel ao repo **`desafio-21dias-agents`** (raiz do repo). Root Directory só é necessário se tudo estiver em um monorepo único.
 
 Guia completo (3 projetos + envs): [`../DEPLOY-VERCEL.md`](../DEPLOY-VERCEL.md)
 
