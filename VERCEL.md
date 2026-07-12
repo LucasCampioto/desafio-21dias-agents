@@ -53,14 +53,29 @@ Se o **backend** ou o **agents** cortar antes, o browser vê **504**.
 O repo inclui `vercel.json` com:
 
 ```json
-{ "functions": { "main.py": { "maxDuration": 60 } } }
+{ "functions": { "main.py": { "maxDuration": 120 } } }
 ```
 
 (chave = entrypoint FastAPI `main.py`, não `api/index.py`)
 
-No **backend**, `api/index.js` também precisa de `maxDuration` ≥ 60s (já configurado).
+No **backend**, `api/index.js` também precisa de `maxDuration` ≥ 120s.
 
-Alternativa no painel: **Project → Settings → Functions → Function Max Duration** → `60` ou `300`.
+**Se a Observability ainda mostrar limite de 30s:**
+
+1. Confirme que o deploy novo foi o que rodou (commit com `maxDuration: 120`)
+2. Vercel → Project → **Settings → Functions** → Function Max Duration → `120` (ou deixe Fluid default 300s)
+3. Ative **Fluid Compute** se estiver desligado
+4. Redeploy **sem cache**
+
+### Performance do agente (chat / evolução)
+
+O pipeline deixou de usar **Agno + tools** (várias idas ao LLM). Agora:
+
+- Chat = 1 chamada `openai.chat.completions`
+- Evolução = 1 chamada OpenAI com `response_format=json_object`
+- Bundle sem `agno` → cold start bem menor
+- Contexto truncado (~4.5k chars)
+- Modelos default: `gpt-4o-mini`
 
 Para respostas mais rápidas, nas envs do agents:
 

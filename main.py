@@ -20,7 +20,7 @@ async def lifespan(app: FastAPI):
     except Exception as exc:
         app.state.routes_loaded = False
         app.state.routes_error = str(exc)
-        logger.exception("Failed to load agent routes (agno/routes): %s", exc)
+        logger.exception("Failed to load agent routes: %s", exc)
     yield
 
 
@@ -40,13 +40,13 @@ async def health_deep():
         result["routes_error"] = app.state.routes_error
 
     try:
-        import agno
+        import openai
 
-        result["agno"] = "ok"
-        result["agno_version"] = getattr(agno, "__version__", "unknown")
+        result["openai"] = "ok"
+        result["openai_version"] = getattr(openai, "__version__", "unknown")
     except Exception as exc:
         result["status"] = "degraded"
-        result["agno"] = "error"
-        result["agno_error"] = str(exc)
+        result["openai"] = "error"
+        result["openai_error"] = str(exc)
 
     return result

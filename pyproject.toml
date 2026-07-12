@@ -3,7 +3,6 @@ name = "quantum-journal-agents"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-    "agno==2.6.9",
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.32.0",
     "openai>=1.0.0",

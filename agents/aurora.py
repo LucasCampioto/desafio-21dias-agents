@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-from agno.agent import Agent
-from agno.models.openai import OpenAIChat
+from openai import OpenAI
 
 from config import get_settings
-
 
 _READINESS_VOICE = {
     "ready": (
@@ -23,15 +21,12 @@ _READINESS_VOICE = {
 }
 
 
-def create_aurora_agent(
-    tools: list,
+def build_aurora_system_prompt(
     context: str,
     *,
     readiness: str,
     question_domain: str,
-) -> Agent:
-    settings = get_settings()
-
+) -> str:
     calibrated = (
         "### Calibragem atual\n"
         f"- readiness declarado pela engine: `{readiness}`\n"
@@ -40,25 +35,52 @@ def create_aurora_agent(
         f"  {_READINESS_VOICE.get(readiness, _READINESS_VOICE['cautious'])}\n"
     )
 
-    return Agent(
-        name="Aurora",
-        model=OpenAIChat(id=settings["aurora_model"]),
-        instructions=[
+    return "\n".join(
+        [
             "Você é Aurora, assistente reflexiva dentro do Quantum Journal.",
             calibrated,
             "Regras inegociáveis:",
-            "1. Você só fala sobre o que estiver textualmente disponível nos blocos de contexto/tooling.",
+            "1. Você só fala sobre o que estiver textualmente disponível no contexto abaixo.",
             "2. Nunca traga checklist genéricos de internet, recomendações de terapia/médico implícitas "
             'nem listas encyclopédicas — inclusive evite "você deve/tenha/compra X".',
             "3. Se faltar evidência suficiente, diga com transparência o que falta e convide para registrar nos exercícios.",
             "4. Ao conectar perguntas (ex.: sonhos materiais ou decisões cotidianas), amarre apenas aos registros já citados",
-            '   (patterns financeiros listados etc.) usando linguagem delicada tipo "nos exercícios você descreveu...".',
-            "5. Responda em português do Brasil, segundo pessoa verbal, plural de respeito natural para a usuária.",
+            '   usando linguagem delicada tipo "nos exercícios você descreveu...".',
+            "5. Responda em português do Brasil, segunda pessoa, com respeito natural.",
+            "6. Respostas curtas e humanas (ideal: 2–4 parágrafos curtos).",
             "### Contexto fornecido (fonte autoritativa desta conversa):\n",
             context,
-            "\n(use tools apenas se algo objetivo ficou em aberto dentro do esperado pela jornada)",
-        ],
-        tools=tools,
-        markdown=True,
-        add_history_to_context=True,
+        ]
     )
+
+
+def run_aurora_chat(
+    message: str,
+    context: str,
+    *,
+    readiness: str,
+    question_domain: str,
+) -> str:
+    """Uma única chamada OpenAI — sem Agno, sem tools, sem histórico pesado."""
+    settings = get_settings()
+    client = OpenAI(api_key=settings["openai_api_key"])
+
+    completion = client.chat.completions.create(
+        model=settings["aurora_model"],
+        messages=[
+            {
+                "role": "system",
+                "content": build_aurora_system_prompt(
+                    context,
+                    readiness=readiness,
+                    question_domain=question_domain,
+                ),
+            },
+            {"role": "user", "content": message},
+        ],
+        max_tokens=700,
+        temperature=0.7,
+    )
+
+    content = completion.choices[0].message.content if completion.choices else None
+    return content or "Desculpe, não consegui formular uma resposta agora."

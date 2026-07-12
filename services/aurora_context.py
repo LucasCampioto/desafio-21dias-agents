@@ -171,7 +171,7 @@ def build_aurora_context(user_id: str, session_id: str | None, topic: str, cover
     theme_header = ["", "## Recorte dinâmico da pergunta", ""]
     theme_lines = _thematic_block(user_id, session_id, topic, coverage)
     assembled = "\n".join(base_lines + theme_header + theme_lines)
-    soft_cap = 10000
+    soft_cap = 4500
     if len(assembled) > soft_cap:
         assembled = assembled[: soft_cap - 1] + "\n…(truncado automaticamente pelo limite de segurança)"
     return assembled
