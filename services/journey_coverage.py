@@ -316,17 +316,27 @@ def _build_journey_coverage_unsafe(user_id: str, session_id: str | None) -> Jour
                 evidence_workspace["journey_meta"].append(f"Últimos dias completos próximos: {cmp}")
 
         if session_exists:
+            answers_count = 0
             for doc in get_collection("day_answers").find({"userId": uid, "sessionId": sid}, {"answers": 1, "dayId": 1}):
                 ans = doc.get("answers") or {}
                 did = int(doc.get("dayId") or 0)
                 if not did:
                     continue
                 has_content |= bool(ans)
+                if ans:
+                    answers_count += 1
                 extra_raw, evid = _accumulate_domains_from_answers(ans, did)
                 for k in domains_raw:
                     if k != "journey_meta":
                         domains_raw[k] += extra_raw[k]
                 _merge_evidence(evidence_workspace, evid)
+
+            # Histórico de exercícios já conta como base para perguntas de evolução
+            if answers_count > 0:
+                domains_raw["journey_meta"] += min(2.5, 0.35 + answers_count * 0.12)
+                evidence_workspace["journey_meta"].append(
+                    f"{answers_count} dias com respostas registradas nesta campanha"
+                )
 
             for sig in get_collection("day_signals").find(
                 {"userId": uid, "sessionId": sid},

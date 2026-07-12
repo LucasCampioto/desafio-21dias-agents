@@ -39,6 +39,7 @@ async def health_deep():
         "routes_loaded": getattr(app.state, "routes_loaded", None),
         "has_openai_key": bool(__import__("os").getenv("OPENAI_API_KEY")),
         "has_mongo_uri": bool(__import__("os").getenv("MONGODB_URI")),
+        "mongo_is_localhost": "localhost" in (__import__("os").getenv("MONGODB_URI") or "localhost"),
         "has_agents_api_key": bool(__import__("os").getenv("AGENTS_API_KEY")),
     }
 

@@ -26,15 +26,18 @@ def _to_json_value(value):
 
 
 def _signals_for_session(user_id: str, session_id: str) -> list[dict]:
-    cursor = get_collection("day_signals").find(
-        {"userId": ObjectId(user_id), "sessionId": ObjectId(session_id)},
-        {"_id": 0},
-    ).sort("dayId", 1)
+    cursor = (
+        get_collection("day_signals")
+        .find(
+            {"userId": ObjectId(user_id), "sessionId": ObjectId(session_id)},
+            {"_id": 0},
+        )
+        .sort("dayId", 1)
+    )
     return [_to_json_value(doc) for doc in cursor]
 
 
-def _session_label(session_id: str) -> str:
-    session = get_collection("sessions").find_one({"_id": ObjectId(session_id)}, {"label": 1})
+def _session_label(session: dict | None, session_id: str) -> str:
     if session and session.get("label"):
         return session["label"]
     return session_id
@@ -54,32 +57,74 @@ def _week_pct(week_data: dict | None, key: str) -> float:
     return round((raw / day_count) * 100, 1)
 
 
+def _campaign_from_session(user_id: str, session: dict, idx: int) -> dict:
+    session_id = str(session["_id"])
+    progress = get_collection("session_progress").find_one({"sessionId": session["_id"]}) or {}
+    completed = progress.get("completedDays") or []
+    signals = _signals_for_session(user_id, session_id)
+    metrics = get_collection("session_metrics").find_one({"sessionId": session["_id"]}, {"_id": 0}) or {}
+
+    return {
+        "sessionId": session_id,
+        "sessionNumber": metrics.get("sessionNumber", idx),
+        "label": _session_label(session, session_id),
+        "overallTone": metrics.get("overallTone") or "neutral",
+        "completedDays": metrics.get("completedDays") or completed,
+        "byWeek": _to_json_value(metrics.get("byWeek") or {}),
+        "campaignArc": _to_json_value(metrics.get("campaignArc") or {}),
+        "daySignalsCount": len(signals),
+        "daySignals": signals,
+        "answersCount": get_collection("day_answers").count_documents(
+            {"userId": ObjectId(user_id), "sessionId": session["_id"]}
+        ),
+    }
+
+
 def build_evolution_input(user_id: str) -> dict:
-    """Monta JSON comparativo entre campanhas para o Analista."""
+    """Monta JSON comparativo entre campanhas para o Analista.
+
+    Preferência: session_metrics. Fallback: sessions + day_answers (quando agents
+    esteve offline e métricas nunca foram geradas).
+    """
+    uid = ObjectId(user_id)
     metrics_docs = list(
-        get_collection("session_metrics")
-        .find({"userId": ObjectId(user_id)}, {"_id": 0})
-        .sort("sessionNumber", 1)
+        get_collection("session_metrics").find({"userId": uid}, {"_id": 0}).sort("sessionNumber", 1)
     )
 
     campaigns = []
-    for idx, metrics in enumerate(metrics_docs, start=1):
-        session_id_raw = metrics.get("sessionId")
-        session_id = str(session_id_raw) if session_id_raw else None
-        signals = _signals_for_session(user_id, session_id) if session_id else []
-        campaigns.append(
-            {
-                "sessionId": session_id,
-                "sessionNumber": metrics.get("sessionNumber", idx),
-                "label": _session_label(session_id) if session_id else f"Campanha {idx}",
-                "overallTone": metrics.get("overallTone"),
-                "completedDays": metrics.get("completedDays", 0),
-                "byWeek": _to_json_value(metrics.get("byWeek", {})),
-                "campaignArc": _to_json_value(metrics.get("campaignArc", {})),
-                "daySignalsCount": len(signals),
-                "daySignals": signals,
-            }
+    if metrics_docs:
+        for idx, metrics in enumerate(metrics_docs, start=1):
+            session_id_raw = metrics.get("sessionId")
+            session_id = str(session_id_raw) if session_id_raw else None
+            signals = _signals_for_session(user_id, session_id) if session_id else []
+            session = (
+                get_collection("sessions").find_one({"_id": ObjectId(session_id)}, {"label": 1})
+                if session_id
+                else None
+            )
+            campaigns.append(
+                {
+                    "sessionId": session_id,
+                    "sessionNumber": metrics.get("sessionNumber", idx),
+                    "label": _session_label(session, session_id or f"Campanha {idx}"),
+                    "overallTone": metrics.get("overallTone"),
+                    "completedDays": metrics.get("completedDays", 0),
+                    "byWeek": _to_json_value(metrics.get("byWeek", {})),
+                    "campaignArc": _to_json_value(metrics.get("campaignArc", {})),
+                    "daySignalsCount": len(signals),
+                    "daySignals": signals,
+                }
+            )
+    else:
+        sessions = list(
+            get_collection("sessions").find({"userId": uid}).sort("createdAt", 1)
         )
+        for idx, session in enumerate(sessions, start=1):
+            campaign = _campaign_from_session(user_id, session, idx)
+            # Só inclui se houver algum progresso real
+            completed = campaign.get("completedDays") or []
+            if campaign["answersCount"] > 0 or (isinstance(completed, list) and len(completed) > 0):
+                campaigns.append(campaign)
 
     comparatives = []
     if len(campaigns) >= 2:
@@ -107,7 +152,8 @@ def build_evolution_input(user_id: str) -> dict:
                     "from": _safe_num(a.get("destructiveAvg")),
                     "to": _safe_num(b.get("destructiveAvg")),
                     "delta": round(
-                        _safe_num(b.get("destructiveAvg")) - _safe_num(a.get("destructiveAvg")), 1
+                        _safe_num(b.get("destructiveAvg")) - _safe_num(a.get("destructiveAvg")),
+                        1,
                     ),
                 },
             }

@@ -104,7 +104,10 @@ def evaluate_guardrail(
     dc = coverage.domains.get(question_domain) or {}
     score = float(dc.get("score") or 0)
 
-    if question_domain == "journey_meta" and score < COVERAGE_THRESHOLD:
+    # Evolução/meta: se há exercícios registrados, libera conversa mesmo sem session_metrics.
+    if question_domain == "journey_meta":
+        if getattr(coverage, "has_registered_journey_content", False) or score >= COVERAGE_THRESHOLD:
+            return GuardrailResult(False, None)
         return GuardrailResult(
             True,
             (
