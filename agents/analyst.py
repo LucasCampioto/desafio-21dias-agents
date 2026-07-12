@@ -9,8 +9,11 @@ from schemas.evolution import EvolutionReport
 def run_analyst(evolution_input: dict) -> EvolutionReport:
     """Relatório via OpenAI direto (JSON) — sem Agno."""
     settings = get_settings()
+    if not settings["openai_api_key"]:
+        raise RuntimeError("OPENAI_API_KEY não configurada no serviço de agents")
+
     client = OpenAI(api_key=settings["openai_api_key"])
-    payload = json.dumps(evolution_input, ensure_ascii=False)
+    payload = json.dumps(evolution_input, ensure_ascii=False, default=str)
 
     # Payload enxuto: evita estouro de tokens e latência
     if len(payload) > 12000:

@@ -102,8 +102,15 @@ def _base_block(user_id: str, session_id: str | None, coverage: JourneyCoverage)
         lines.append("Sem campanha ativa no backend — convide com gentileza a iniciar em /jornada/iniciar.")
         return lines
 
-    status = fetch_today_status(user_id, session_id)
-    lesson = fetch_today_lesson(user_id, session_id)
+    try:
+        status = fetch_today_status(user_id, session_id)
+    except Exception:
+        status = {"error": "status indisponível"}
+    try:
+        lesson = fetch_today_lesson(user_id, session_id)
+    except Exception:
+        lesson = {"error": "lição indisponível"}
+
     arcs = coverage.emotional_arc or {}
     lines.append(f"Sessão: {session_id} — rótulo: {coverage.session_label or 'campanha'}")
     lines.append(f"Tom geral (readiness atual): **{coverage.readiness}**")

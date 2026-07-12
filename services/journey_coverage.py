@@ -250,6 +250,14 @@ def _empty_coverage_payload(user_id: str | None, session_id: str | None) -> Jour
 
 
 def build_journey_coverage(user_id: str, session_id: str | None) -> JourneyCoverage:
+    try:
+        return _build_journey_coverage_unsafe(user_id, session_id)
+    except Exception:
+        # Mongo/Atlas indisponível não pode derrubar o chat com 500 opaco.
+        return _empty_coverage_payload(user_id, session_id)
+
+
+def _build_journey_coverage_unsafe(user_id: str, session_id: str | None) -> JourneyCoverage:
     session_missing = not session_id
     sid = None
     session_exists = False

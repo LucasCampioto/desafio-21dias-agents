@@ -10,8 +10,13 @@ DAYS_PATH = Path(__file__).resolve().parent.parent / "content" / "days.json"
 
 
 def load_days_content() -> list[dict]:
-    with open(DAYS_PATH, encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(DAYS_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+    except Exception:
+        return []
 
 
 def get_day_by_id(day_id: int) -> dict | None:

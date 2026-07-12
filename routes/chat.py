@@ -17,34 +17,39 @@ router = APIRouter(tags=["chat"])
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(body: ChatRequest, _: str = Depends(verify_api_key)):
-    topic = classify_topic(body.message)
-    coverage = build_journey_coverage(body.userId, body.sessionId)
-    guardrail = evaluate_guardrail(topic, body.sessionId, coverage)
-
-    logger.info(
-        "chat.pipeline topic=%s blocked=%s readiness=%s primary=%s thresh=%s",
-        topic,
-        guardrail.blocked,
-        coverage.readiness,
-        coverage.primary_domain,
-        GUARDRAIL_COVERAGE_THRESHOLD,
-    )
-
-    if guardrail.blocked:
-        reply = guardrail.reply or "Estou aqui com você — podemos tentar mais tarde assim que houver registros suficientes."
-        return ChatResponse(reply=reply)
-
-    context_text = build_aurora_context(body.userId, body.sessionId, topic, coverage)
-    logger.info("chat.aurora_context chars=%s topic=%s", len(context_text), topic)
-
     try:
+        topic = classify_topic(body.message)
+        coverage = build_journey_coverage(body.userId, body.sessionId)
+        guardrail = evaluate_guardrail(topic, body.sessionId, coverage)
+
+        logger.info(
+            "chat.pipeline topic=%s blocked=%s readiness=%s primary=%s thresh=%s",
+            topic,
+            guardrail.blocked,
+            coverage.readiness,
+            coverage.primary_domain,
+            GUARDRAIL_COVERAGE_THRESHOLD,
+        )
+
+        if guardrail.blocked:
+            reply = (
+                guardrail.reply
+                or "Estou aqui com você — podemos tentar mais tarde assim que houver registros suficientes."
+            )
+            return ChatResponse(reply=reply)
+
+        context_text = build_aurora_context(body.userId, body.sessionId, topic, coverage)
+        logger.info("chat.aurora_context chars=%s topic=%s", len(context_text), topic)
+
         reply = run_aurora_chat(
             body.message,
             context_text,
             readiness=coverage.readiness,
             question_domain=topic,
         )
+        return ChatResponse(reply=reply)
+    except HTTPException:
+        raise
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Aurora error: {exc}") from exc
-
-    return ChatResponse(reply=reply)
+        logger.exception("chat.failed userId=%s sessionId=%s", body.userId, body.sessionId)
+        raise HTTPException(status_code=500, detail=f"Aurora error: {type(exc).__name__}: {exc}") from exc

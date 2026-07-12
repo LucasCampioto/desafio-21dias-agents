@@ -34,10 +34,17 @@ async def health():
 
 @app.get("/health/deep")
 async def health_deep():
-    result = {"status": "ok", "routes_loaded": getattr(app.state, "routes_loaded", None)}
+    result = {
+        "status": "ok",
+        "routes_loaded": getattr(app.state, "routes_loaded", None),
+        "has_openai_key": bool(__import__("os").getenv("OPENAI_API_KEY")),
+        "has_mongo_uri": bool(__import__("os").getenv("MONGODB_URI")),
+        "has_agents_api_key": bool(__import__("os").getenv("AGENTS_API_KEY")),
+    }
 
     if getattr(app.state, "routes_error", None):
         result["routes_error"] = app.state.routes_error
+        result["status"] = "degraded"
 
     try:
         import openai
@@ -48,5 +55,15 @@ async def health_deep():
         result["status"] = "degraded"
         result["openai"] = "error"
         result["openai_error"] = str(exc)
+
+    try:
+        from db.mongo import get_client
+
+        get_client().admin.command("ping")
+        result["mongo"] = "ok"
+    except Exception as exc:
+        result["status"] = "degraded"
+        result["mongo"] = "error"
+        result["mongo_error"] = str(exc)
 
     return result

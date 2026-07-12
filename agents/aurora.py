@@ -63,6 +63,9 @@ def run_aurora_chat(
 ) -> str:
     """Uma única chamada OpenAI — sem Agno, sem tools, sem histórico pesado."""
     settings = get_settings()
+    if not settings["openai_api_key"]:
+        raise RuntimeError("OPENAI_API_KEY não configurada no serviço de agents")
+
     client = OpenAI(api_key=settings["openai_api_key"])
 
     completion = client.chat.completions.create(
