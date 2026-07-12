@@ -44,9 +44,30 @@ Em **Network Access**, permita `0.0.0.0/0` para conexões serverless.
 
 ## Duração máxima (chat / IA)
 
-Não configure `maxDuration` em `vercel.json` para este preset.
+Chat e evolução fazem cold start + Mongo + OpenAI. O fluxo é:
 
-Use o painel: **Project → Settings → Functions → Function Max Duration** → `60` ou `300` segundos.
+`Frontend → Backend (Node) → Agents (Python) → OpenAI`
+
+Se o **backend** ou o **agents** cortar antes, o browser vê **504**.
+
+O repo inclui `vercel.json` com:
+
+```json
+{ "functions": { "main.py": { "maxDuration": 60 } } }
+```
+
+(chave = entrypoint FastAPI `main.py`, não `api/index.py`)
+
+No **backend**, `api/index.js` também precisa de `maxDuration` ≥ 60s (já configurado).
+
+Alternativa no painel: **Project → Settings → Functions → Function Max Duration** → `60` ou `300`.
+
+Para respostas mais rápidas, nas envs do agents:
+
+```
+AURORA_MODEL=gpt-4o-mini
+ANALYST_MODEL=gpt-4o-mini
+```
 
 ## Arquivos necessários no repo
 

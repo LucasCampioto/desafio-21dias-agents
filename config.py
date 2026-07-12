@@ -14,8 +14,10 @@ def get_settings():
         "mongodb_uri": os.getenv("MONGODB_URI", "mongodb://localhost:27017/quantum-journal"),
         "backend_url": os.getenv("BACKEND_URL", "http://localhost:3000").rstrip("/"),
         "agents_api_key": os.getenv("AGENTS_API_KEY", ""),
-        "aurora_model": os.getenv("AURORA_MODEL", "gpt-4o"),
-        "analyst_model": os.getenv("ANALYST_MODEL", "gpt-4o"),
+        # gpt-4o-mini é o padrão em produção: menos latência (evita 504 na Vercel).
+        # Use AURORA_MODEL/ANALYST_MODEL=gpt-4o se quiser qualidade máxima.
+        "aurora_model": os.getenv("AURORA_MODEL", "gpt-4o-mini"),
+        "analyst_model": os.getenv("ANALYST_MODEL", "gpt-4o-mini"),
         "analyze_day_model": os.getenv("ANALYZE_DAY_MODEL", "gpt-4o-mini"),
     }
 
