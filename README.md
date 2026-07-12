@@ -37,11 +37,13 @@ Docs interativas: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ## Deploy na Vercel
 
-Configuração pronta: `vercel.json` (usa `main.py` na raiz) e `runtime.txt`.
+**Sem `vercel.json`** — preset FastAPI usa `main.py` + `pyproject.toml` (`entrypoint = "main:app"`) + `index.py` como fallback.
 
-**Importante:** conecte o projeto Vercel ao repo **`desafio-21dias-agents`** (raiz do repo). Root Directory só é necessário se tudo estiver em um monorepo único.
+Se o install falhar por timeout com `agno`, veja logs em **Deployment → Building** na Vercel ou considere Railway para agents.
 
-Guia completo (3 projetos + envs): [`../DEPLOY-VERCEL.md`](../DEPLOY-VERCEL.md)
+Leia **[VERCEL.md](./VERCEL.md)** (erro `unmatched-function-pattern` e settings do painel).
+
+Guia geral (3 projetos + envs): [`../DEPLOY-VERCEL.md`](../DEPLOY-VERCEL.md)
 
 ## Variáveis de ambiente
 
