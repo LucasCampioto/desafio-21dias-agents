@@ -1,4 +1,4 @@
-# Quantum Journal — Agents (FastAPI + Agno)
+# Quantum Journal — Agents (FastAPI + Agnoo)
 
 Serviço Python de agentes IA para o Quantum Journal: **Aurora** (chat), **AnalyzeDay** (métricas por dia) e **Analista** (relatório de evolução).
 
