@@ -14,6 +14,7 @@ _DOMAIN_LABEL_PT: dict[str, str] = {
     "finance": "finanças e decisões com o dinheiro",
     "relationships": "vínculos, família e relacionamentos",
     "self_worth": "autoestima e identidade",
+    "behavior": "hábitos, decisões do dia a dia e compromissos",
     "journey_meta": "acompanhar sua evolução na campanha",
     "general": "reflexões gerais do que você já registrou",
 }
@@ -98,8 +99,10 @@ def evaluate_guardrail(
     if not getattr(coverage, "has_registered_journey_content", True):
         return GuardrailResult(True, _no_journal_entries_reply())
 
-    if question_domain == "general":
-        return GuardrailResult(False, None)
+    if question_domain in ("general", "behavior"):
+        # Decisões cotidianas e hábitos: libera se há qualquer registro na jornada.
+        if getattr(coverage, "has_registered_journey_content", False) or question_domain == "general":
+            return GuardrailResult(False, None)
 
     dc = coverage.domains.get(question_domain) or {}
     score = float(dc.get("score") or 0)

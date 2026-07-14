@@ -6,9 +6,27 @@ from fastapi import Header, HTTPException
 
 load_dotenv()
 
+DEFAULT_MODEL = "gpt-4o-mini"
+_MODEL_PLACEHOLDERS = frozenset(
+    {
+        "AURORA_MODEL",
+        "ANALYST_MODEL",
+        "ANALYZE_DAY_MODEL",
+        "chatgpt",
+    }
+)
+
 
 def _is_local_mongo(uri: str) -> bool:
     return "localhost" in uri or "127.0.0.1" in uri
+
+
+def _resolve_model(env_name: str, default: str = DEFAULT_MODEL) -> str:
+    """Lê o modelo da env; ignora valores vazios ou iguais ao nome da variável."""
+    raw = (os.getenv(env_name) or "").strip().strip("\"'")
+    if not raw or raw in _MODEL_PLACEHOLDERS or raw == env_name:
+        return default
+    return raw
 
 
 @lru_cache
@@ -21,9 +39,9 @@ def get_settings():
         "agents_api_key": os.getenv("AGENTS_API_KEY", ""),
         # gpt-4o-mini é o padrão em produção: menos latência (evita 504 na Vercel).
         # Use AURORA_MODEL/ANALYST_MODEL=gpt-4o se quiser qualidade máxima.
-        "aurora_model": os.getenv("AURORA_MODEL", "gpt-4o-mini"),
-        "analyst_model": os.getenv("ANALYST_MODEL", "gpt-4o-mini"),
-        "analyze_day_model": os.getenv("ANALYZE_DAY_MODEL", "gpt-4o-mini"),
+        "aurora_model": _resolve_model("AURORA_MODEL"),
+        "analyst_model": _resolve_model("ANALYST_MODEL"),
+        "analyze_day_model": _resolve_model("ANALYZE_DAY_MODEL"),
     }
 
     if os.getenv("VERCEL"):

@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 
 from db.mongo import get_collection, try_object_id
+
+logger = logging.getLogger(__name__)
 
 
 def _safe_float(v, default=0.0) -> float:
@@ -54,8 +57,16 @@ def _self_field_hit(field_key: str) -> float:
     return 0.0
 
 
+def _behavior_field_hit(field_key: str) -> float:
+    k = field_key.lower()
+    for blob in ("behavior", "habit", "commit", "decision", "impulse", "trigger", "ritual", "jejum"):
+        if blob in k:
+            return 0.5
+    return 0.0
+
+
 def _scan_text_for_domains(text_lower: str) -> dict[str, float]:
-    deltas = {"finance": 0.0, "relationships": 0.0, "self_worth": 0.0}
+    deltas = {"finance": 0.0, "relationships": 0.0, "self_worth": 0.0, "behavior": 0.0}
     fin_kw = (
         "dinheiro",
         "compr",
@@ -103,12 +114,36 @@ def _scan_text_for_domains(text_lower: str) -> dict[str, float]:
         "não sirvo",
         "nao sirvo",
     )
+    behavior_kw = (
+        "sair",
+        "beber",
+        "bebida",
+        "álcool",
+        "alcool",
+        "festa",
+        "balada",
+        "bar ",
+        "hábito",
+        "habito",
+        "compromisso",
+        "não vou mais",
+        "nao vou mais",
+        "parar de",
+        "deixar de",
+        "evitar",
+        "tentação",
+        "tentacao",
+        "impulso",
+        "jejum",
+    )
     if any(k in text_lower for k in fin_kw):
         deltas["finance"] += 0.12
     if any(k in text_lower for k in rel_kw):
         deltas["relationships"] += 0.14
     if any(k in text_lower for k in self_kw):
         deltas["self_worth"] += 0.13
+    if any(k in text_lower for k in behavior_kw):
+        deltas["behavior"] += 0.16
     return deltas
 
 
@@ -118,14 +153,21 @@ def _theme_domain(theme: str) -> str | None:
         return "finance"
     if any(k in t for k in ("família", "parceiro", "mãe", "pai", "relacio", "vínculo", "afilha")):
         return "relationships"
+    if any(k in t for k in ("sair", "beber", "festa", "hábito", "habito", "impulso", "compromisso")):
+        return "behavior"
     if any(k in t for k in ("auto", "valor", "compara", "identidade", "culpa", "medo")):
         return "self_worth"
     return None
 
 
 def _accumulate_domains_from_answers(answers_blob: dict, day_id: int) -> tuple[dict[str, float], dict[str, list[str]]]:
-    raw = {"finance": 0.0, "relationships": 0.0, "self_worth": 0.0}
-    evidence_bucket: dict[str, list[str]] = {"finance": [], "relationships": [], "self_worth": []}
+    raw = {"finance": 0.0, "relationships": 0.0, "self_worth": 0.0, "behavior": 0.0}
+    evidence_bucket: dict[str, list[str]] = {
+        "finance": [],
+        "relationships": [],
+        "self_worth": [],
+        "behavior": [],
+    }
 
     def _push(kind: str, label: str) -> None:
         if len(evidence_bucket[kind]) < 12:
@@ -136,6 +178,7 @@ def _accumulate_domains_from_answers(answers_blob: dict, day_id: int) -> tuple[d
         raw["finance"] += _finance_field_hit(fk)
         raw["relationships"] += _rel_field_hit(fk)
         raw["self_worth"] += _self_field_hit(fk)
+        raw["behavior"] += _behavior_field_hit(fk)
         texts: list[str] = []
         if isinstance(value, str):
             texts.append(value)
@@ -144,7 +187,7 @@ def _accumulate_domains_from_answers(answers_blob: dict, day_id: int) -> tuple[d
         merged = "\n".join(texts).lower()
         deltas = _scan_text_for_domains(merged)
         for k, v in deltas.items():
-            raw[k] += v
+            raw[k] = raw.get(k, 0.0) + v
         excerpt = merged.replace("\n", " ").strip()
         excerpt_short = excerpt[:120] + ("..." if len(excerpt) > 120 else "")
         score_hit = False
@@ -154,11 +197,14 @@ def _accumulate_domains_from_answers(answers_blob: dict, day_id: int) -> tuple[d
         elif _rel_field_hit(fk):
             score_hit = True
             _push("relationships", f"Campo {fk}: \"{excerpt_short}\"")
+        elif _behavior_field_hit(fk):
+            score_hit = True
+            _push("behavior", f"Campo {fk}: \"{excerpt_short}\"")
         elif _self_field_hit(fk):
             score_hit = True
             _push("self_worth", f"Campo {fk}: \"{excerpt_short}\"")
         if not score_hit and excerpt_short:
-            for kind in ("finance", "relationships", "self_worth"):
+            for kind in ("finance", "relationships", "self_worth", "behavior"):
                 chunk = deltas.get(kind, 0)
                 if chunk > 0 and len(evidence_bucket[kind]) < 12:
                     _push(kind, excerpt_short[:90])
@@ -232,6 +278,7 @@ def _empty_coverage_payload(user_id: str | None, session_id: str | None) -> Jour
         "finance": dict(blanks),
         "relationships": dict(blanks),
         "self_worth": dict(blanks),
+        "behavior": dict(blanks),
         "journey_meta": dict(blanks),
         "general": dict(blanks),
     }
@@ -254,6 +301,11 @@ def build_journey_coverage(user_id: str, session_id: str | None) -> JourneyCover
         return _build_journey_coverage_unsafe(user_id, session_id)
     except Exception:
         # Mongo/Atlas indisponível não pode derrubar o chat com 500 opaco.
+        logger.exception(
+            "journey_coverage.failed userId=%s sessionId=%s",
+            user_id,
+            session_id,
+        )
         return _empty_coverage_payload(user_id, session_id)
 
 
@@ -264,11 +316,18 @@ def _build_journey_coverage_unsafe(user_id: str, session_id: str | None) -> Jour
     has_content = False
     session_label: str | None = None
 
-    domains_raw = {"finance": 0.0, "relationships": 0.0, "self_worth": 0.0, "journey_meta": 0.0}
+    domains_raw = {
+        "finance": 0.0,
+        "relationships": 0.0,
+        "self_worth": 0.0,
+        "behavior": 0.0,
+        "journey_meta": 0.0,
+    }
     evidence_workspace: dict[str, list[str]] = {
         "finance": [],
         "relationships": [],
         "self_worth": [],
+        "behavior": [],
         "journey_meta": [],
     }
 
@@ -328,12 +387,13 @@ def _build_journey_coverage_unsafe(user_id: str, session_id: str | None) -> Jour
                 extra_raw, evid = _accumulate_domains_from_answers(ans, did)
                 for k in domains_raw:
                     if k != "journey_meta":
-                        domains_raw[k] += extra_raw[k]
+                        domains_raw[k] += float(extra_raw.get(k) or 0.0)
                 _merge_evidence(evidence_workspace, evid)
 
-            # Histórico de exercícios já conta como base para perguntas de evolução
+            # Histórico de exercícios já conta como base para perguntas de evolução/comportamento
             if answers_count > 0:
                 domains_raw["journey_meta"] += min(2.5, 0.35 + answers_count * 0.12)
+                domains_raw["behavior"] += min(2.0, 0.3 + answers_count * 0.1)
                 evidence_workspace["journey_meta"].append(
                     f"{answers_count} dias com respostas registradas nesta campanha"
                 )
@@ -368,7 +428,7 @@ def _build_journey_coverage_unsafe(user_id: str, session_id: str | None) -> Jour
         domains_raw["journey_meta"] += 1.05
 
     domains_norm = _normalize_scores(domains_raw)
-    thematic_keys = ["finance", "relationships", "self_worth"]
+    thematic_keys = ["finance", "relationships", "self_worth", "behavior"]
     thematic_peak = max(domains_norm[t] for t in thematic_keys) if thematic_keys else 0.0
     meta_peak = domains_norm.get("journey_meta", 0.0)
     domains_norm["general"] = round(min(1.0, 0.06 + thematic_peak * 0.88 + meta_peak * 0.06), 4)

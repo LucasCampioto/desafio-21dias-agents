@@ -38,7 +38,13 @@ async def chat(body: ChatRequest, _: str = Depends(verify_api_key)):
             )
             return ChatResponse(reply=reply)
 
-        context_text = build_aurora_context(body.userId, body.sessionId, topic, coverage)
+        context_text = build_aurora_context(
+            body.userId,
+            body.sessionId,
+            topic,
+            coverage,
+            message=body.message,
+        )
         logger.info("chat.aurora_context chars=%s topic=%s", len(context_text), topic)
 
         reply = run_aurora_chat(

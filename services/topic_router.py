@@ -3,7 +3,7 @@
 import re
 
 DOMAINS = frozenset(
-    {"finance", "relationships", "self_worth", "journey_meta", "general"}
+    {"finance", "relationships", "self_worth", "journey_meta", "behavior", "general"}
 )
 
 _META_PATTERNS = [
@@ -89,9 +89,33 @@ _SELF_TERMS = [
     "sou suficient",
 ]
 
+_BEHAVIOR_TERMS = [
+    "sair",
+    "beber",
+    "bebida",
+    "álcool",
+    "alcool",
+    "bar ",
+    " festa",
+    "balada",
+    "compromisso",
+    "hábito",
+    "habito",
+    "rotina",
+    "jejum",
+    "parei",
+    "não vou",
+    "nao vou",
+    "decisão",
+    "decisao",
+    "tentação",
+    "tentacao",
+    "impulso",
+]
+
 
 def classify_topic(text: str) -> str:
-    """Classifica mensagem da usuária em um único domínio (prioridade: meta → finanças → relações → auto → geral)."""
+    """Classifica mensagem (prioridade: meta → comportamento → finanças → relações → auto → geral)."""
     if not text or not text.strip():
         return "general"
 
@@ -107,6 +131,10 @@ def classify_topic(text: str) -> str:
 
     if _hits_meta():
         return "journey_meta"
+
+    for term in _BEHAVIOR_TERMS:
+        if term in compact:
+            return "behavior"
 
     for term in _FINANCE_TERMS:
         if term in compact:
